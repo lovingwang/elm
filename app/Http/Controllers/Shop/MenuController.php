@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers\Shop;
+
+use App\Models\Menu;
+use App\Models\MenuCategory;
+use App\Models\Shop;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
+class MenuController extends BaseController
+{
+    public function index()
+    {
+        $shop_id=Auth::user()->shop_id;
+
+        $menuses=Menu::where('shop_id','=',$shop_id)->get();
+
+        //得到搜索栏菜品分类
+        $menu_categories=MenuCategory::all();
+
+        //显示视图1
+        return view('shop.menus.index', compact('menuses','menu_categories'));
+    }
+//添加
+    public function add(Request $request){
+        $menu_categories=MenuCategory::all();
+        $shop_id=Auth::user()->shop_id;
+        $shops=Shop::where('id',$shop_id)->get();
+        if($request->isMethod('post')){
+//            判断健壮
+            $this->validate($request,[
+                'goods_name'=>'required|max:20',
+                 'goods_price'=>'required',
+                'description'=>'required',
+                'tips'=>'required',
+            ]);
+            $data=$request->post();
+            $data['goods_img']='';
+            if($request->file('goods_img')){
+
+                $data['goods_img']=$request->file('goods_img')->store('menu','img');
+            }
+
+//         dd($data);
+                   Menu::create($data);
+//                   提示
+            $request->session()->flash('success',"添加成功");
+//           跳转
+            return redirect()->route('menu.index');
+
+        }
+
+   return view('shop.menus.add',compact('menu_categories','shops'));
+    }
+
+    public  function  edit(Request $request,$id){
+        //得到当前这条
+      $menu=Menu::find($id);
+        $shop_id=Auth::user()->shop_id;
+//        通过Auth筛选出满足自己条件的
+        $shops=Shop::where('id',$shop_id)->get();
+        $menu_categories=MenuCategory::all();
+        if($request->isMethod('post')) {
+//            判断健壮
+            $this->validate($request, [
+                'goods_name' => 'required|max:20',
+                'goods_price' => 'required',
+                'description' => 'required',
+                'tips' => 'required',
+            ]);
+            $data = $request->post();
+//            删除原来的图片
+            $filename=$menu->goods_img;
+            File::delete("/uploads/$filename");
+            $data['goods_img'] = '';
+            if ($request->file('goods_img')) {
+
+                $data['goods_img'] = $request->file('goods_img')->store('menu', 'img');
+            }
+            $menu->update($data);
+            $request->session()->flash('success',"修改成功");
+//           跳转
+            return redirect()->route('menu.index');
+
+        }
+        return view('shop.menus.edit',compact('menu_categories','shops','menu'));
+
+    }
+
+
+    public function del(Request $request,$id){
+
+        $menu=Menu::find($id);
+        $filename=$menu->goods_img;
+        File::delete("/uploads/$filename");
+        $menu->delete();
+
+        $request->session()->flash('danger',"删除成功");
+//           跳转
+        return redirect()->route('menu.index');
+
+    }
+
+
+}
