@@ -1,5 +1,5 @@
 @extends('shop.layouts.default')
-@section("title","首页")
+@section("title","菜品分类添加")
 @section("content")
     <h1 class="text-center">添加菜品分类</h1>
     <form    action="" method="post" enctype="multipart/form-data">

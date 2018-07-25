@@ -1,5 +1,5 @@
     @extends('admin.layouts.default')
-
+    @section("title","商家管理信息编辑")
     @section('content')
 
 <h2 style="color: red" >商家管理</h2>

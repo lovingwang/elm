@@ -1,20 +1,10 @@
-@extends('admin.layouts.default')
+@extends('shop.layouts.default')
 @section("title","编辑管理员")
 @section("content")
-    <h1 class="text-center">编辑管理员</h1>
+    <h1 class="text-center">修改密码</h1>
     <form    action="" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
 
-        <div class="form-group">
-            <label for="exampleInputEmail1"> 管理员名称</label>
-            <input type="text" class="form-control"name="name" value="{{$admin->name}}"id="exampleInputEmail1" placeholder="name">
-        </div>
-
-
-        <div class="form-group">
-            <label for="exampleInputEmail1">注册邮箱</label>
-            <input type="email" class="form-control"name="email" value="{{$admin->email}}" id="exampleInputEmail1" placeholder="Email">
-        </div>
         <div class="form-group">
             <label for="exampleInputPassword1">旧密码</label>
             <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">

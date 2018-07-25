@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends BaseController
 {
@@ -70,12 +71,15 @@ class UserController extends BaseController
 
 //商户登录
     public  function  login(Request $request){
+        if(Auth::user()){
+            Auth::logout();
+        }
         if($request->isMethod('post')){
             $this->validate($request,['name'=>'required',
                 'password'=>'required',
             ]) ;
-//        登录
-
+//        登d
+//            dd(Auth::user());
             if( Auth::attempt(['name'=>$request->post('name'),
                 'password'=>$request->post('password')
             ],$request->has('remember'))) {
@@ -85,7 +89,7 @@ class UserController extends BaseController
 
                 if($shops->status==1){
                     $request->session()->flash("success", "登录成功");
-                    return redirect()->route("user.index1");
+                    return redirect()->route("user.index0");
 
                 }else{
                     $request->session()->flash("warning", "正在审核中.....");
@@ -94,6 +98,7 @@ class UserController extends BaseController
 
             }else{
                 $request->session()->flash("danger", "密码或者账号错误.....");
+                return redirect()->route("user.login");
             }
 
         }
@@ -101,8 +106,27 @@ class UserController extends BaseController
         return view('shop.user.login');
     }
 
+    public function change(Request $request){
+
+//        dd($_POST);
+
+        if (Hash::check($request->password,Auth::user()->password )) {
+
+            Auth::user()->password=bcrypt($request->new_password);
+            Auth::user()->save();
+            $request->session()->flash('success',"密码修改成功！请重新登录");
+            Auth::logout();
+            return view('shop.user.login');
+
+        }
+
+        return view('shop.user.change');
+    }
+
+
 //商户注销
     public  function  logout(Request $request){
+
         Auth::logout();
 
         $request->session()->flash("danger","退出成功");
@@ -111,13 +135,24 @@ class UserController extends BaseController
 
     }
 
-    public function index(){
+    public function index0(){
 
-//dd(Auth::user());
-
-        return view('shop.user.index');
+        return view('shop.user.index0');
     }
 
+    public function index1(){
+
+        return view('shop.user.index1');
+    }
+    public function index2(){
+
+        return view('shop.user.index2');
+    }
+
+    public function index3(){
+
+        return view('shop.user.index3');
+    }
 
 
 }

@@ -12,23 +12,56 @@ use Illuminate\Support\Facades\File;
 
 class MenuController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $shop_id=Auth::user()->shop_id;
+        if(Auth::user()==null){
+            //提示
+            $request->session()->flash('danger',"对不起！你还没有登录");
+//           跳转
+            return redirect()->route('user.login');
+        }else {
+//          接收选择的搜索种类
+            $kind=$request->post('category_id');
+            $min_price=$request->post('min_price');
+            $max_price=$request->post('max_price');
+            $search=$request->post('search');
 
-        $menuses=Menu::where('shop_id','=',$shop_id)->get();
+//       $data=$request->query();
+//       dd($search);
 
-        //得到搜索栏菜品分类
-        $menu_categories=MenuCategory::all();
+            $shop_id = Auth::user()->shop_id;
 
-        //显示视图1
-        return view('shop.menus.index', compact('menuses','menu_categories'));
+            $query = Menu::orderBy('id')->where('shop_id', '=', $shop_id);
+//                ->where('category_id','=',$kind);
+
+
+if($kind!==null){
+    $query->where('category_id','=',$kind);
+}
+if($min_price!==null){
+    $query->where('goods_price','>=',$min_price);
+}
+if($max_price!==null){
+    $query->where('goods_price','<=',$max_price);
+}
+if($search!==null){
+    $query->where('goods_name','like',"%$search%");
+}
+$menuses=$query->paginate(2);
+
+            //得到搜索栏菜品分类
+            $menu_categories = MenuCategory::where('shop_id','=',$shop_id)->get();
+
+            //显示视图1
+            return view('shop.menus.index', compact('menuses','min_price','max_price','search','kind', 'menu_categories'));
+        }
     }
 //添加
     public function add(Request $request){
-        $menu_categories=MenuCategory::all();
+
         $shop_id=Auth::user()->shop_id;
         $shops=Shop::where('id',$shop_id)->get();
+        $menu_categories=MenuCategory::where('shop_id','=',$shop_id)->get();
         if($request->isMethod('post')){
 //            判断健壮
             $this->validate($request,[
@@ -62,7 +95,7 @@ class MenuController extends BaseController
         $shop_id=Auth::user()->shop_id;
 //        通过Auth筛选出满足自己条件的
         $shops=Shop::where('id',$shop_id)->get();
-        $menu_categories=MenuCategory::all();
+        $menu_categories=MenuCategory::where('shop_id','=',$shop_id)->get();
         if($request->isMethod('post')) {
 //            判断健壮
             $this->validate($request, [

@@ -95,7 +95,6 @@ class AdminController extends BaseController
 
         $admin= Admin::findOrfail($id);
 
-
         if($request->isMethod('post')){
             $this->validate($request,
                 ['name' => 'required|min:2|max:7',

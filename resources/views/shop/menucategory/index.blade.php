@@ -1,5 +1,5 @@
 @extends('shop.layouts.default')
-@section("title","首页")
+@section("title","菜品首页")
 @section("content")
     <a  class="btn btn-warning"href="{{route('menu_categories.add')}}">添加</a>
 <table class="table table-hover">
@@ -29,6 +29,6 @@
 
     @endforeach
 </table>
-
+{{$menucategorys->links()}}
 @stop
 

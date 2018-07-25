@@ -2,7 +2,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><b>F</b>BI</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>菜鸟联盟</b></span>
     </a>
@@ -96,7 +96,7 @@
 
                 @auth
                     <li>
-                        <a href="#" data-toggle="control-sidebar">欢迎你!   {{ \Illuminate\Support\Facades\Auth::guard('admin')->user()->name}}</a>
+                        <a href="">欢迎你!   {{ \Illuminate\Support\Facades\Auth::guard('admin')->user()->name}}</a>
                     </li>
 
                     <li>

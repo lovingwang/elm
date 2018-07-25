@@ -1,5 +1,5 @@
 @extends('shop.layouts.default')
-@section('title','我的菜单列表')
+@section('title','菜单列表首页')
 @section('content')
     <div class="container-fluid">
         <a href="{{route('menu.add')}}" class="btn btn-primary">添加</a>
@@ -7,17 +7,17 @@
             {{csrf_field()}}
             <div class="form-group">
                 <div class="form-group">
-                    按类 <select name="menu_category_id">
+                    按类 <select name="category_id">
                         <option value="">菜品类</option>
                         @foreach($menu_categories as $menu_category)
-                            <option  size="4" value="{{$menu_category->id}}">{{$menu_category->name}}</option>
+                            <option  size="4" value="{{$menu_category->id}}" @if($menu_category->id=="$kind") selected @endif>{{$menu_category->name}}</option>
                         @endforeach
                     </select>
                 </div>
-                按价格区间：<input type="text" size="4" name="min_price" value="{{old('min_price')}}">元 ---<input type="text" name="max_price"   size="4" value="{{old('max_price')}}">元
+                按价格区间：<input type="text" size="4" name="min_price" value="{{request()->input('min_price')}}">元 ---<input type="text" name="max_price"   size="4" value="{{request()->input('max_price')}}">元
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="search" placeholder="请输入搜素内容">
+                <input type="text" class="form-control" name="search" value="{{request()->input('search')}}" placeholder="请输入搜素内容">
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
         </form>
@@ -48,11 +48,11 @@
             <td>{{$menus->categories->name}}</td>
             <td>
               @if($menus->goods_img)
-                    <img src="/uploads/{{$menus->goods_img}}" style="height: 50px" alt="">
+                    <img src="/uploads/{{$menus->goods_img}}" style="height: 40px" alt="">
               @endif
             </td>
             <td>{{$menus->goods_price}}</td>
-            <td>{{$menus->description}}</td>
+            <td style="width:120px">{{$menus->description}}</td>
             <td>{{$menus->month_sales}}</td>
             <td>{{$menus->rating}}</td>
             <td>{{$menus->rating_count}}</td>
@@ -71,5 +71,6 @@
         </tr>
             @endforeach
     </table>
-    {{--{{$menuses->links()}}--}}
+
+    {{$menuses->appends(['category_id'=>$kind,'min_price'=>$min_price,'max_price'=>$max_price,'search'=>$search])->links()}}
     @stop

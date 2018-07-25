@@ -1,5 +1,5 @@
 @extends('shop.layouts.default')
-@section("title","编辑")
+@section("title","商家账号编辑")
 @section("content")
 
     <form    action="" method="post" enctype="multipart/form-data">

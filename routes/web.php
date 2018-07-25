@@ -51,8 +51,11 @@ Route::domain('shop.eleb.com')->namespace('Shop')->group(function () {
     Route::any('user/logout',"UserController@logout")->name('user.logout');
     Route::any('user/login',"UserController@login")->name('user.login');
     Route::any('user/reg',"UserController@reg")->name('user.reg');
-    Route::any('user/index1',"UserController@index")->name('user.index1');
-
+    Route::any('user/change',"UserController@change")->name('user.change');
+    Route::any('user/index0',"UserController@index0")->name('user.index0');
+    Route::any('user/index1',"UserController@index1")->name('user.index1');
+    Route::any('user/index2',"UserController@index2")->name('user.index2');
+    Route::any('user/index3',"UserController@index3")->name('user.index3');
 
 //    菜品分类管理
     Route::any('menu_categories/index',"MenuCategoryController@index")->name('menu_categories.index');

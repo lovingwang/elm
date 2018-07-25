@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class MenuCategoryController extends BaseController
 {
- public function index(){
+ public function index(Request $request){
+     if(Auth::user()==null){
+         //提示
+         $request->session()->flash('danger',"对不起！你还没有登录");
+//           跳转
+         return redirect()->route('user.login');
+     }else{
 $shop_id=Auth::user()->shop_id;
 //dd($shop_id);
- $menucategorys= MenuCategory::where('shop_id','=',$shop_id)->get();
+ $menucategorys= MenuCategory::where('shop_id','=',$shop_id)->paginate(3);
 
-     return view('shop.menucategory.index',compact('menucategorys'));
+     return view('shop.menucategory.index',compact('menucategorys'));}
  }
 public function add(Request $request){
      $shop_id=Auth::user()->shop_id;
@@ -82,22 +88,22 @@ public  function  edit(Request $request,$id){
     public  function  del(Request $request,$id)
     {
         $menucategory=  MenuCategory::find($id);
-        $shop_id=Auth::user()->shop_id;
-        $shops=Shop::where('id','=',$shop_id)->get();
 
-;
-    if(Menu::where('shop_id','=',$shop_id)->where('category_id','=',$id)){
+//        $shop_id=Auth::user()->shop_id;
+//        dd($shop_id);
+        $shops=Menu::where('category_id','=',$id)->first();
 
-        dd('ww');
-//        dd(Menu::find($id)->id);
+if($shops){
 
-    }
+       $request->session()->flash('danger',"此分类下还有菜品，不能删除..");
+//           跳转
+        return redirect()->route('menu_categories.index');
+}
 
 //          $request->session()->flash('danger',"此分类下还有菜品，不能删除..");
 //           跳转
 //          return redirect()->route('menu_categories.index');
-//      }else{
-        dd('ss');
+
           $menucategory->delete();
           $request->session()->flash('danger',"删除成功");
 //           跳转

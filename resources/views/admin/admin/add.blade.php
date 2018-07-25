@@ -1,5 +1,5 @@
 @extends('admin.layouts.default')
-@section("title","首页")
+@section("title","添加管理员")
 @section("content")
     <h1 class="text-center">添加管理员</h1>
     <form    action="" method="post" enctype="multipart/form-data">

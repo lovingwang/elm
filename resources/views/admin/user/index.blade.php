@@ -1,5 +1,5 @@
 @extends('admin.layouts.default')
-@section("title","首页")
+@section("title","商家账号首页")
 @section("content")
 
     <h1 style="color: red" class="text-center">商家管理</h1>

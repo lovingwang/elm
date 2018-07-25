@@ -1,4 +1,4 @@
-@extends('shop.layouts.default1')
+@extends('shop.layouts.default')
 @section("title","首页")
 @section("content")
     <h1 class="text-center">商家注册</h1>

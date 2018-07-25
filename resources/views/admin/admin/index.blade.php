@@ -1,5 +1,5 @@
     @extends('admin.layouts.default')
-
+    @section("title","管理员首页")
     @section('content')
 
 <h1 style="color: red" class="text-center">管理员</h1>

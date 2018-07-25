@@ -18,6 +18,22 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style type="text/css">
+        *{ margin:0px; padding:0px;}
+        #nav{ width:600px; height:40px; margin:0 auto;}
+        #na ul{ list-style:none;}
+        #na ul li{ float:left; line-height:40px; text-align:center; position:relative;}
+        #na ul li a{ text-decoration:none; color:#000; display:block;padding:0px 10px;}
+        #na ul li a:hover{ color:#FFF; background:#333}
+        #na ul li ul{ position:absolute; display:none;}
+        #na ul li ul li{ float:none; line-height:30px; text-align:left;}
+        #na ul li ul li a{ width:100%;}
+        #na ul li ul li a:hover{ background-color:#06f;}
+        #na ul li:hover ul{ display:block}
+    </style>
+
+
 </head>
 <body>
 
@@ -27,12 +43,12 @@
         <div class="menu">
             <div class="top-nav">
                 <ul>
-                    <li ><a href="{{route('user.index1')}}">Home</a></li>
-                    <li><a href="{{route('menu_categories.index')}}">About</a></li>
-                    <li ><a href="products.html">Products</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="products.html">Delivery</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li ><a href="{{route('user.index0')}}">首页</a></li>
+                    <li><a href="{{route('menu_categories.index')}}">菜品管理</a></li>
+                    <li ><a href="{{route('menu.index')}}">菜单管理</a></li>
+                    <li><a href="{{route('user.index1')}}">简介</a></li>
+                    <li><a href="{{route('user.index2')}}">关于我们</a></li>
+                    <li><a href="{{route('user.index3')}}">联系我们</a></li>
                 </ul>
                 <div class="clear"></div>
             </div>
@@ -76,14 +92,7 @@
         </div>
     </div>
 </div>
-<div class="footer-bottom">
-    <div class="wrap">
-        <div class="copy">
-            <p>Copyright © 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-        </div>
-    </div>
-</div>
-
+@include('shop.layouts._footer')
 
 
 </body>
