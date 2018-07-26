@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends BaseController
 {
@@ -71,9 +72,18 @@ $menuses=$query->paginate(2);
             ]);
             $data=$request->post();
             $data['goods_img']='';
-            if($request->file('goods_img')){
+//            if($request->file('goods_img')){
+//
+//                $data['goods_img']=$request->file('goods_img')->store('menu','img');
+//            }
+            $file=$request->file('goods_img');
+//            dd($file);
+            if ($file!==null){
+                //上传文件
 
-                $data['goods_img']=$request->file('goods_img')->store('menu','img');
+                $fileName= $file->store("test","oss");
+//             dd($fileName);
+    $data['goods_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$fileName";
             }
 
 //         dd($data);
@@ -106,12 +116,25 @@ $menuses=$query->paginate(2);
             $data = $request->post();
 //            删除原来的图片
             $filename=$menu->goods_img;
-            File::delete("/uploads/$filename");
-            $data['goods_img'] = '';
-            if ($request->file('goods_img')) {
+            File::delete("https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename");
+//
+////            $data['goods_img'] = '';
+////            if ($request->file('goods_img')) {
+////
+////                $data['goods_img'] = $request->file('goods_img')->store('menu', 'img');
+////            }
+            $data['goods_img']='';
 
-                $data['goods_img'] = $request->file('goods_img')->store('menu', 'img');
+            $file=$request->file('goods_img');
+//            dd($file);
+            if ($file!==null){
+                //上传文件
+
+                $fileName= $file->store("test","oss");
+//             dd($fileName);
+                $data['goods_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$fileName";
             }
+
             $menu->update($data);
             $request->session()->flash('success',"修改成功");
 //           跳转

@@ -57,9 +57,10 @@
 
                 @include("shop.layouts._errors")
                 @include("shop.layouts._msg")
+            <div class="container-fluid" style="height: 600px">
                 @yield("content")
 
-
+        </div>
 
 
             <div class="content-last">
@@ -82,7 +83,7 @@
                     <p><div class="container-fluid" style="width: 200px">卖冰淇淋必须从冬天开始，因为冬天顾客少，会逼迫你降低成本，改善服务。如果能在冬天的逆境中生存，就再也不会害怕夏天的竞争。又称“瘦鹅理论
 
                     </div></p>
-              
+
                 </div>
                 <div class="col_1_of_4 span_1_of_4">
                     <img src="/cpts/images/leaf.png" alt="">

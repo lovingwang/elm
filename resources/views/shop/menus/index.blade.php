@@ -48,7 +48,7 @@
             <td>{{$menus->categories->name}}</td>
             <td>
               @if($menus->goods_img)
-                    <img src="/uploads/{{$menus->goods_img}}" style="height: 40px" alt="">
+                    <img src="{{$menus->goods_img}}" style="height: 40px" alt="">
               @endif
             </td>
             <td>{{$menus->goods_price}}</td>
