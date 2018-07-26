@@ -21,7 +21,7 @@ class MenuController extends BaseController
             return redirect()->route('user.login');
         }else {
 //          接收选择的搜索种类
-            $kind=$request->post('category_id');
+                       $kind=$request->post('category_id');
             $min_price=$request->post('min_price');
             $max_price=$request->post('max_price');
             $search=$request->post('search');
@@ -33,7 +33,6 @@ class MenuController extends BaseController
 
             $query = Menu::orderBy('id')->where('shop_id', '=', $shop_id);
 //                ->where('category_id','=',$kind);
-
 
 if($kind!==null){
     $query->where('category_id','=',$kind);

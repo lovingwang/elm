@@ -23,7 +23,7 @@ class AdminController extends BaseController
                 'password' => $request->post('password')
             ], $request->has('remember'))) {
                 $request->session()->flash("success","登录成功");
-                return redirect()->intended(route('admin.index'));
+                return redirect()->intended(route('admin.index0'));
 
             }else{
                 $request->session()->flash("danger","账号或密码不正确");
@@ -63,6 +63,11 @@ class AdminController extends BaseController
 
         return view('admin.admin.index', compact('admins'));
 
+    }
+
+    public function index0()
+    {
+        return view('admin.admin.index0');
     }
 
     public function add(Request $request){

@@ -35,13 +35,18 @@ Route::domain('admin.eleb.com')->group(function () {
     Route::any('admin/add',"Admin\AdminController@add")->name('admin.add');
     Route::any('admin/edit/{id}',"Admin\AdminController@edit")->name('admin.edit');
     Route::any('admin/del/{id}',"Admin\AdminController@del")->name('admin.del');
+    Route::get('admin/index0',"Admin\AdminController@index0")->name('admin.index0');
 
 //  商家个人信息管理
     Route::get('user/index',"Admin\UserController@index")->name('user.index');
     Route::any('user/edit/{id}',"Admin\UserController@edit")->name('user.edit');
     Route::any('user/del/{id}',"Admin\UserController@del")->name('user.del');
     Route::any('user/reset/{id}',"Admin\UserController@reset")->name('user.reset');
-
+//   平台 活动管理
+    Route::any('article/index',"Admin\ArticleController@index")->name('article.index');
+    Route::any('article/add',"Admin\ArticleController@add")->name('article.add');
+    Route::any('article/edit/{id}',"Admin\ArticleController@edit")->name('article.edit');
+    Route::any('article/del/{id}',"Admin\ArticleController@del")->name('article.del');
 });
 
 

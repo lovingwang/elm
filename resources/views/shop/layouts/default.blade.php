@@ -46,7 +46,7 @@
                     <li ><a href="{{route('user.index0')}}">首页</a></li>
                     <li><a href="{{route('menu_categories.index')}}">菜品管理</a></li>
                     <li ><a href="{{route('menu.index')}}">菜单管理</a></li>
-                    <li><a href="{{route('user.index1')}}">简介</a></li>
+                    <li><a href="{{route('user.index1')}}">最新活动</a></li>
                     <li><a href="{{route('user.index2')}}">关于我们</a></li>
                     <li><a href="{{route('user.index3')}}">联系我们</a></li>
                 </ul>
@@ -54,38 +54,41 @@
             </div>
         </div>
         <div class="main">
-            <div class="prod">
+
                 @include("shop.layouts._errors")
                 @include("shop.layouts._msg")
                 @yield("content")
-                <div class="clear"></div>
-            </div>
+
+
 
 
             <div class="content-last">
                 <div class="col_1_of_4 span_1_of_4">
                     <img src="/cpts/images/glass.png" alt="">
-                    <h3>Lorem Ipsum is simply</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <button class="btn1 btn-8 btn-8a">Read More</button>
+                    <h3>杯子哲学</h3>
+                    <p> <div class="container-fluid" style="width: 200px">猫爱上了杯子里的鱼，却打碎了杯子。 鱼离开水死了，猫终于明白了， 爱一个人不一定非要和他在一起</div>
+                    </p>
+
                 </div>
                 <div class="col_1_of_4 span_1_of_4">
                     <img src="/cpts/images/plate.png" alt="">
-                    <h3>Lorem Ipsum is simply</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <button class="btn1 btn-8 btn-8a">Read More</button>
+                    <h3>盘子人生</h3>
+                    <p><div class="container-fluid" style="width: 200px">我们生活中经常会听到这样一句话，“越简单越真实的才是最美的”</div></p>
+
                 </div>
                 <div class="col_1_of_4 span_1_of_4">
                     <img src="/cpts/images/icecream.png" alt="">
-                    <h3>Lorem Ipsum is simply</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <button class="btn1 btn-8 btn-8a">Read More</button>
+                    <h3>雪糕哲学</h3>
+                    <p><div class="container-fluid" style="width: 200px">卖冰淇淋必须从冬天开始，因为冬天顾客少，会逼迫你降低成本，改善服务。如果能在冬天的逆境中生存，就再也不会害怕夏天的竞争。又称“瘦鹅理论
+
+                    </div></p>
+              
                 </div>
                 <div class="col_1_of_4 span_1_of_4">
                     <img src="/cpts/images/leaf.png" alt="">
-                    <h3>Lorem Ipsum is simply</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <button class="btn1 btn-8 btn-8a">Read More</button>
+                    <h3>叶子人生</h3>
+                    <p><div class="container-fluid" style="width: 200px">叶子不像花朵那样漂亮，但是没有叶子植物就无法进行光合作用，整株植物就没有营养可用了，我们往往只看到花的美丽而没有看到叶子为花作出的贡献</div></p>
+
                 </div>
                 <div class="clear"></div>
             </div>

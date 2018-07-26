@@ -1,7 +1,6 @@
     @extends('admin.layouts.default')
     @section("title","商家信息管理首页")
     @section('content')
-
 <h1 style="color: red" class="text-center">商家信息管理</h1>
 <a href="{{route('shop.add')}}" class=" btn btn-warning">添加</a>
    <table  class="table table-hover"  >

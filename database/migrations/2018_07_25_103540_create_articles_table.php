@@ -15,6 +15,10 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->comment('活动名称');
+            $table->text('content')->comment('活动内容');
+            $table->datetime('start_time')->comment('开始时间');
+            $table->datetime('end_time')->comment('结束时间');
             $table->timestamps();
         });
     }

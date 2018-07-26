@@ -19,7 +19,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="search" value="{{request()->input('search')}}" placeholder="请输入搜素内容">
             </div>
-            <button type="submit" class="btn btn-default">搜索</button>
+            <button type="submit" class="form-control btn-warning">搜索</button>
         </form>
     </div>
     <table class="table table-hover table-bordered text-center">

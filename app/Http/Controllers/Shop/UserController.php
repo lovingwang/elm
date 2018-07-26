@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Models\Article;
 use App\Models\Shop;
 use App\Models\ShopCategory;
 use App\Models\User;
@@ -141,8 +142,16 @@ class UserController extends BaseController
     }
 
     public function index1(){
+//        得到当前时间
+        $now=time();
+        $ss=date('Y-m-d',$now);
+        if($ss){
 
-        return view('shop.user.index1');
+            $query=Article::where('start_time','<',$ss)->Where('end_time','>',$ss)
+                ->orWhere('start_time','>',$ss);
+        }
+ $articles=$query->paginate(2);
+        return view('shop.user.index1',compact('articles'));
     }
     public function index2(){
 
