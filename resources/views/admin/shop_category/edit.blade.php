@@ -15,7 +15,7 @@
         <label for="exampleInputPassword1">分类图片</label>
         <input type="file"  name="logo" style="width: 400px"  >
     </div>
-    <img src="/uploads/{{$shop->logo}}" style="width: 100px">
+    <img src="{{$shop->logo}}" style="width: 100px">
     <div class="form-group">
         <label for="exampleInputEmail1">分类状态</label>
         <input type="radio"   name="status" value="1" {{$shop->status?'checked':''}}>显示

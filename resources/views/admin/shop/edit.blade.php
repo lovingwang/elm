@@ -79,7 +79,7 @@
     <div class="form-group">
         <label for="exampleInputEmail1">商家图片</label>
     </div> <input type="file"  name="shop_img"  >
-    <img src="/uploads/{{$shop->shop_img}}" style="width: 100px">
+    <img src="{{$shop->shop_img}}" style="width: 100px">
     <div class="form-group">
 
         <div class="form-group">

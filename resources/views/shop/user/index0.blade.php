@@ -5,9 +5,9 @@
     <div class="wrap">
         <div class="total">
 
-            <div class="menu">
+            {{--<div class="menu">--}}
 
-            </div>
+            {{--</div>--}}
             <div class="main">
                 <div class="prod">
                     <div class="col_1_of_3 span_1_of_3">

@@ -3,7 +3,6 @@
 @section("content")
     <h1 class="text-center">商家注册</h1>
     <form    action="" method="post" enctype="multipart/form-data">
-
         {{ csrf_field() }}
         <div class="form-group">
             <label for="exampleInputEmail1">商家名称</label>

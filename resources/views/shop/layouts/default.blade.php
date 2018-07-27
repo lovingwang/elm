@@ -57,7 +57,7 @@
 
                 @include("shop.layouts._errors")
                 @include("shop.layouts._msg")
-            <div class="container-fluid" style="height: 600px">
+            <div class="container-fluid" >
                 @yield("content")
 
         </div>

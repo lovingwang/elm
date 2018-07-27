@@ -52,7 +52,8 @@ class ShopController extends BaseController
     $shop['shop_img']="";
     $shop['status']='1';
     if($request->file('shop_img')){
-        $shop['shop_img']=$request->file('shop_img')->store('shop1','img');
+        $filename=$request->file('shop_img')->store('shop1','oss');
+        $shop['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
     }
 //添加数据            //开启事务
       DB::transaction(function () use ($shop,$request){
@@ -90,15 +91,35 @@ class ShopController extends BaseController
         $shopCategorys=ShopCategory::where("status", 1)->get();
 
         if($request->isMethod('post')){
+            $this->validate($request,[
+                'shop_category_id'=>'required',
+                'shop_name'=>'required|min:2' ,
+                'shop_img'=>'required',
+                'shop_rating'=>'required' ,
+                'brand'=>'required' ,
+                'fengniao'=>'required' ,
+                'bao'=>'required' ,
+                'piao'=>'required' ,
+                'zhun'=>'required' ,
+                'start_send'=>'required',
+                'send_cost'=>'required',
+                'notice'=>'required|min:2' ,
+                'discount'=>'required|min:2' ,
+//                'name'=>'required|min:2',
+                'email'=>'email',
+                'password'=>'required'
+//  'status'=>'required''required|min:2'
+            ]) ;
 //             得到所有数据
             $data=$request->all();
 
 //             删除之前的图片
             $img=$shop->shop_img;
-            File::delete("/uploads/$img");
+            File::delete($img);
             $data['shop_img']="";
             if($request->file('shop_img')){
-                $data['shop_img']=$request->file('shop_img')->store('shop1','img');
+                $filename=$request->file('shop_img')->store('shop1','oss');
+                $data['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
             DB::transaction(function () use ($data,$shop,$user,$request) {
                 $shop->update($data);
@@ -131,7 +152,7 @@ class ShopController extends BaseController
         $logo=$shop->shop_img;
 
 //       删除之前的图片
-        File::delete("uploads/$logo");
+        File::delete($logo);
         $user->delete();
         $shop->delete();
 //        提示信息

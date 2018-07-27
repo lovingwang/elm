@@ -81,7 +81,7 @@ $menuses=$query->paginate(2);
             if ($file!==null){
                 //上传文件
 
-                $fileName= $file->store("test","oss");
+                $fileName= $file->store("menu","oss");
 //             dd($fileName);
     $data['goods_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$fileName";
             }
@@ -115,8 +115,8 @@ $menuses=$query->paginate(2);
             ]);
             $data = $request->post();
 //            删除原来的图片
-            $filename=$menu->goods_img;
-            File::delete("https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename");
+            $img=$menu->goods_img;
+            File::delete($img);
 //
 ////            $data['goods_img'] = '';
 ////            if ($request->file('goods_img')) {
@@ -130,7 +130,7 @@ $menuses=$query->paginate(2);
             if ($file!==null){
                 //上传文件
 
-                $fileName= $file->store("test","oss");
+                $fileName= $file->store("menu","oss");
 //             dd($fileName);
                 $data['goods_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$fileName";
             }
@@ -150,7 +150,7 @@ $menuses=$query->paginate(2);
 
         $menu=Menu::find($id);
         $filename=$menu->goods_img;
-        File::delete("/uploads/$filename");
+        File::delete($filename);
         $menu->delete();
 
         $request->session()->flash('danger',"删除成功");

@@ -1,8 +1,9 @@
 @extends('shop.layouts.default')
 @section('title','菜单列表首页')
 @section('content')
-    <div class="container-fluid">
-        <a href="{{route('menu.add')}}" class="btn btn-primary">添加</a>
+    <div class="container-fluid " style="margin-right:22px">
+    <a href="{{route('menu.add')}}" class="btn btn-primary">添加</a>
+
         <form class="form-inline navbar-right">
             {{csrf_field()}}
             <div class="form-group">
@@ -20,11 +21,11 @@
                 <input type="text" class="form-control" name="search" value="{{request()->input('search')}}" placeholder="请输入搜素内容">
             </div>
             <button type="submit" class="form-control btn-warning">搜索</button>
+
         </form>
     </div>
-    <table class="table table-hover table-bordered text-center">
-        <caption class="text-center text-success">我的所有菜品</caption>
-
+    <div class="warp" style="height: 400px">
+    <table class="table table-hover table-bordered text-center" style="font-size: 12px">
         <tr>
             <th class="text-center">名称</th>
             <th class="text-center">所属商家</th>
@@ -48,7 +49,7 @@
             <td>{{$menus->categories->name}}</td>
             <td>
               @if($menus->goods_img)
-                    <img src="{{$menus->goods_img}}" style="height: 40px" alt="">
+                  <img src="{{$menus->goods_img}}"style="width: 80px;height: 40px">
               @endif
             </td>
             <td>{{$menus->goods_price}}</td>
@@ -60,12 +61,12 @@
             <td>{{$menus->satisfy_count}}</td>
             <td>{{$menus->satisfy_rate}}</td>
             <td>
-            1
+            {{$menus->status}}
             </td>
 
-            <td class="text-left">
+            <td class="text">
                 <a href="{{route('menu.edit',$menus->id)}}" class="btn btn-primary glyphicon glyphicon-edit"></a>
-                <a href="{{route('menu.del',$menus->id)}}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                <a href="{{route('menu.del',$menus->id)}}" class="btn btn-danger  glyphicon glyphicon-trash"></a>
 
             </td>
         </tr>
@@ -73,4 +74,6 @@
     </table>
 
     {{$menuses->appends(['category_id'=>$kind,'min_price'=>$min_price,'max_price'=>$max_price,'search'=>$search])->links()}}
-    @stop
+
+    </div>
+@stop

@@ -8,15 +8,15 @@
     {{csrf_field()}}
     <div class="form-group" >
 
-      条件： <select  style="height: 20px" name="time">
+      条件： <select  style="height: 30px;background:darksalmon" name="time"  >
             <option  value="" >请选择</option>
             <option  value="0"  >未开始</option>
             <option  value="1"  >进行中</option>
             <option  value="-1" >已结束</option>
             </select>
         </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="submit" class="form-group btn-info" value="筛选">
+    &nbsp;&nbsp;
+    <input type="submit" class="form-group btn-info" style="height: 30px" value="筛选">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </form>
    <table class="table table-bordered"  >

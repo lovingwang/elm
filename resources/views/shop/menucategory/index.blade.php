@@ -1,6 +1,7 @@
 @extends('shop.layouts.default')
 @section("title","菜品首页")
 @section("content")
+    <div class="container-fluid" style="height: 400px">
     <a  class="btn btn-warning"href="{{route('menu_categories.add')}}">添加</a>
 <table class="table table-hover">
 
@@ -29,6 +30,8 @@
 
     @endforeach
 </table>
+</div>
+
 {{$menucategorys->links()}}
 @stop
 

@@ -32,7 +32,9 @@ class ShopCategoryController extends BaseController
 //   var_dump($data);exit;
             $data['logo']='';
             if($request->file('logo')){
-                $data['logo']= $request->file('logo')->store("shop","img");
+
+                $filename= $request->file('logo')->store("shop","oss");
+             $data['logo']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
 //    dd($data);
 //     //添加数据
@@ -63,11 +65,13 @@ class ShopCategoryController extends BaseController
             $data=$request->all();
 
             $logo=$shop->logo;
-//        dd($logo);
-            File::delete("uploads/$logo");
+
+            File::delete($logo);
+//            dd(11);
             $data['logo']='';
             if($request->file('logo')){
-                $data['logo']= $request->file('logo')->store("shop","img");
+                $filename= $request->file('logo')->store("shop","oss");
+                $data['logo']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
 
 //            dd($data);
@@ -89,7 +93,7 @@ class ShopCategoryController extends BaseController
         $logo=$shop->logo;
 
 //       删除之前的图片
-        File::delete("uploads/$logo");
+        File::delete($logo);
         $shop->delete();
 //        提示信息
         $request->session()->flash('danger','删除成功');

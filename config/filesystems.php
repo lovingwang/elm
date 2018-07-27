@@ -47,7 +47,7 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
+//
         'oss' => [
                 'driver'        => 'oss',
                 'access_id'     => 'LTAIRa6RADNzNbVI',
@@ -62,10 +62,9 @@ return [
     ],
 
 
-
         'img' => [
             'driver' => 'local',
-            'root' => public_path('uploads'),
+            'root' => public_path(),
             'url' => '/',
             'visibility' => 'public',
         ],

@@ -16,7 +16,7 @@
        <tr  >
            <td >{{$shop->id}}</td>
            <td>{{$shop->name}}</td>
-           <td> @if($shop->logo)  <img src="/uploads/{{$shop->logo}}" style="width: 100px ">@endif</td>
+           <td> @if($shop->logo)  <img src="{{$shop->logo}}" style="width: 100px;height: 70px ">@endif</td>
            <td>{{$shop->status?'是':'否'}}</td>
            <td>
             <a class="btn btn-info" href="{{route('shop_category.edit',['id'=>$shop->id])}}">编辑</a>

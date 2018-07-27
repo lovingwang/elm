@@ -1,9 +1,8 @@
-@extends('shop.layouts.default')
+@extends('admin.layouts.default')
 @section("title","商家账号编辑")
 @section("content")
 
     <form    action="" method="post" enctype="multipart/form-data">
-
         {{ csrf_field() }}
         <div class="form-group">
             <label for="exampleInputEmail1">商家名称</label>
@@ -14,7 +13,7 @@
         </div>
         <select  class="form-control" style="width: 35%"name="shop_category_id">
             @foreach($shopCategorys as $shopCategory)
-                <option value="{{$shopCategory->id}}" >{{$shopCategory->name}}</option>
+                <option value="{{$shopCategory->id}}"@if($shopCategory->id==$shop->shop_category_id) selected @endif >{{$shopCategory->name}}</option>
             @endforeach
         </select>
         <div class="form-group">
@@ -77,7 +76,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">商家图片</label>
         </div> <input type="file"  name="shop_img"  >
-        <img src="/uploads/{{$shop->shop_img}}" style="width: 100px">
+         <img src="{{$shop->shop_img}}" style="width: 100px">
         <div class="form-group">
 
         </div>

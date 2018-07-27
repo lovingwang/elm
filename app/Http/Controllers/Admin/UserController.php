@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UserController extends BaseController
 {
@@ -42,11 +43,16 @@ class UserController extends BaseController
                     'email' => 'email',
                 ]);
             $data=$request->all();
+            $img=$user->shop_img;
+
+            File::delete($img);
 
             $data['shop_img']="";
             if($request->file('shop_img')){
-                $data['shop_img']=$request->file('shop_img')->store('shop1','img');
+                $filename=$request->file('shop_img')->store('shop1','oss');
+                $data['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
+//            dd($data);
             DB::transaction(function () use ($shop,$data,$user,$request){
                 $shop->update($data);
 
@@ -60,7 +66,6 @@ class UserController extends BaseController
                     'email' => $request->input('email'),
                 ]);
             });
-//        $shop->update($data);
 
             //     编辑成功提示
             $request->session()->flash("success", "编辑成功");
