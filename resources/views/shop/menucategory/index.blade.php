@@ -5,7 +5,7 @@
     <a  class="btn btn-warning"href="{{route('menu_categories.add')}}">添加</a>
 <table class="table table-hover">
 
-    <tr>
+    <tr style="background:orange">
         <th>id</th>
         <th>菜品名字</th>
         <th>菜品编号</th>
@@ -16,7 +16,7 @@
     </tr>
 
         @foreach($menucategorys as $menucategory)
-        <tr>
+        <tr style="background:#f0c674">
         <td>{{$menucategory->id}}</td>
         <td>{{$menucategory->name}}</td>
         <td>{{$menucategory->type_accumulation}}</td>

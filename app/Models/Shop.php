@@ -23,6 +23,8 @@ class Shop extends Model
         'discount' ,
         'status',
 
+
+
     ];
 
     public function shopCategory(){

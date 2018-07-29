@@ -5,7 +5,7 @@
 	<div class="wrap" style="height: 450px">
 	<div class="total">
         <marquee width=100% behavior=alternate direction=left align=middle>
-            <h2><font color="orange">最新活动正在火热进行中</font></h2></marquee>
+            <h2><font color="orange">最新活动正在火热进行中。。。。。。</font></h2></marquee>
 	</div>
 
         <table class="table table-hover">

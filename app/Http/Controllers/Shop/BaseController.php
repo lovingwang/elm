@@ -11,7 +11,7 @@ class BaseController extends Controller
     {
 
         $this->middleware('auth')
-            ->except('login','index0','index','index1','index2','index3');
+            ->except('login','reg','index0','index','index1','index2','index3');
 
 
         //添加保安 验证登录

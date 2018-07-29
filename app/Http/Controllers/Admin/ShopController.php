@@ -41,8 +41,8 @@ class ShopController extends BaseController
                 'notice'=>'required|min:2' ,
                 'discount'=>'required|min:2' ,
 //                'name'=>'required|min:2',
-                'email'=>'email',
-                'password'=>'required'
+//                'email'=>'email',
+//                'password'=>'required'
 //  'status'=>'required''required|min:2'
             ]) ;
 
@@ -84,12 +84,12 @@ class ShopController extends BaseController
 
     public function edit(Request $request,$id){
         $shop=Shop::find($id);
-
-         $id=User::where('shop_id',$shop->id)->first()->id;
-          $user=User::find($id);
+//dd($shop);
+//        得到相对应的user中的id
+         $dd=User::where('shop_id',$shop->id)->first()->id;
+      $user=User::find($dd);
 //        商家分类 得到所有
         $shopCategorys=ShopCategory::where("status", 1)->get();
-
         if($request->isMethod('post')){
             $this->validate($request,[
                 'shop_category_id'=>'required',
@@ -105,14 +105,12 @@ class ShopController extends BaseController
                 'send_cost'=>'required',
                 'notice'=>'required|min:2' ,
                 'discount'=>'required|min:2' ,
-//                'name'=>'required|min:2',
-                'email'=>'email',
-                'password'=>'required'
-//  'status'=>'required''required|min:2'
-            ]) ;
+
+
+            ]);
 //             得到所有数据
             $data=$request->all();
-
+//            dd($data);
 //             删除之前的图片
             $img=$shop->shop_img;
             File::delete($img);
@@ -121,7 +119,8 @@ class ShopController extends BaseController
                 $filename=$request->file('shop_img')->store('shop1','oss');
                 $data['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
-            DB::transaction(function () use ($data,$shop,$user,$request) {
+
+          DB::transaction(function () use ($data,$shop,$user,$request) {
                 $shop->update($data);
 
                 $user->update([

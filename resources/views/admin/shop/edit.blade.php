@@ -5,7 +5,7 @@
 <h2 style="color: red" >商家管理</h2>
 
 
-<form    action="" method="post" enctype="multipart/form-data">
+<form   action="" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="exampleInputEmail1">商家名称</label>

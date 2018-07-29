@@ -35,9 +35,11 @@ class UserController extends BaseController
 //            图片上传
             $file = $request->file('shop_img');
             //判断是否上传了图片
-            if ($file) {
-                //存在就上传
-                $shop->shop_img = $file->store("shop1", 'img');
+            if ($file) {//存在就上传
+
+                    $filename=$file->store('shop1','oss');
+                    $shop['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
+
                 //dd($shop->shop_img);
             }
 
@@ -47,7 +49,6 @@ class UserController extends BaseController
 //
                 $shop->save();
 //      再添加用户信息
-
 
                 User::create([
                     //  'email' => $request->input('email'),

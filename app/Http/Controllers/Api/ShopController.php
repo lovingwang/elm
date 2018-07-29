@@ -19,24 +19,16 @@ class ShopController extends Controller
             $shops=Shop::where('status',1)->where('shop_name','like',"%$key%")->get();
         }
 
-//        dd($shops);
+
       foreach ($shops as $shop){
           $shop->distance= rand(1000,2000);
           $shop->estimate_time=$shop->distance / 100;
       }
-
+//        dd($shops);
         return $shops;
     }
     public  function  index(Request $request){
 
-//        $config = [
-//            'access_key' => 'LTAIRa6RADNzNbVI',
-//            'access_secret' => 'XoF7WTW48TO8kWgAHl4tCiGjEYy1iD',
-//            'sign_name' => '王波',
-//        ];
-//
-//        $aliSms = new AliSms();
-//        $response = $aliSms->sendSms('15320239465', 'SMS_140625143', ['code'=> '123'], $config);
 
 //    dd(11);
 //        得到id

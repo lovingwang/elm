@@ -52,10 +52,9 @@ class UserController extends BaseController
                 $filename=$request->file('shop_img')->store('shop1','oss');
                 $data['shop_img']="https://lovingwang.oss-cn-shenzhen.aliyuncs.com/$filename";
             }
-//            dd($data);
+//          dd($data);
             DB::transaction(function () use ($shop,$data,$user,$request){
                 $shop->update($data);
-
 
 
                 $user->update([

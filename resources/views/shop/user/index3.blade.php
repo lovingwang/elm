@@ -9,26 +9,26 @@
    		  <div class="contact">
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
-				  	<h3>Contact Us</h3>
+				  	<h3>记得联系我们哟！</h3>
 					    <form method="post" action="contact-post.html">
 					    	<div>
-						    	<span><label>Name</label></span>
+						    	<span><label>姓名</label></span>
 						    	<span><input name="userName" type="text" class="textbox"></span>
 						    </div>
 						    <div>
-						    	<span><label>E-Mail</label></span>
+						    	<span><label>邮箱</label></span>
 						    	<span><input name="userEmail" type="text" class="textbox"></span>
 						    </div>
 						    <div>
-						     	<span><label>Mobile</label></span>
+						     	<span><label>联系方式</label></span>
 						    	<span><input name="userPhone" type="text" class="textbox"></span>
 						    </div>
 						    <div>
-						    	<span><label>Subject</label></span>
+						    	<span><label>主题</label></span>
 						    	<span><textarea name="userMsg"> </textarea></span>
 						    </div>
 						   <div>
-						   		<button class="btn1 btn-8 btn-8a">Submit</button>
+						   		<button class="btn1 btn-8 btn-8a">提交</button>
 						  </div>
 					    </form>
 				  </div>
@@ -37,16 +37,15 @@
 					<div class="contact_info">
     	 				<h3>Find Us Here</h3>
 					    	  <div class="map">
-							   	    <iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265" style="color:#666;text-align:left;font-size:12px">View Larger Map</a></small>
+							   	    <iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/bootstrap/1.png"?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small></small>
 							  </div>
       				</div>
       			<div class="company_address">
-				     	<h3>Address</h3>
-						    	<p>500 Lorem Ipsum Dolor Sit,</p>
-						<p>Phone:(00) 222 666 444</p>
+				     	<h3>联系方式：</h3>
+						<p>tel:(00) 222 666 444</p>
 				   		<p>Fax: (000) 000 00 00 0</p>
 				 	 	<p>Email: <span>info@mycompany.com</span></p>
-				   		<p>Follow on: <span>Facebook</span>, <span>Twitter</span></p>
+				   		<p>address: <span>the College  of Chongqing Internet </span>
 				   </div>
 				 </div>
 				 <div class="clear"></div> 

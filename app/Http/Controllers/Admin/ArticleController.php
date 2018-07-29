@@ -35,7 +35,7 @@ class ArticleController extends BaseController
 
         }
         }
-$articles=$arts->paginate(1);
+$articles=$arts->paginate(2);
 
 //        显示视图
         return view('admin.article.index',['articles'=>$articles,'time'=>$time,'data'=>$data]);

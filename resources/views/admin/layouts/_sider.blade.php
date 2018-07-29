@@ -24,7 +24,7 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header"></li>
             <li class="active treeview">
                 <a href="javascript:;">
                     <i class="fa fa-dashboard"></i> <span>系统管理平台</span>
@@ -43,14 +43,17 @@
 
 
             <li class="treeview">
-                <a href="javascript:;">
+                <a href="{{route('user.index0')}}">
                     <i class="fa fa-pie-chart"></i>
-                    <span>新闻</span>
+                    <span>商家首页</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
+                <ul class="treeview-menu">
 
+                    <li><a href="{{route('user.index0')}}"><i class="fa fa-circle-o"></i> 商家注册或登录管理</a></li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#">

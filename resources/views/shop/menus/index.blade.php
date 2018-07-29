@@ -18,7 +18,7 @@
                 按价格区间：<input type="text" size="4" name="min_price" value="{{request()->input('min_price')}}">元 ---<input type="text" name="max_price"   size="4" value="{{request()->input('max_price')}}">元
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="search" value="{{request()->input('search')}}" placeholder="请输入搜素内容">
+                <input type="text" class="form-control" name="search" value="{{request()->input('search')}}" placeholder="请输入搜索内容">
             </div>
             <button type="submit" class="form-control btn-warning">搜索</button>
 
@@ -26,7 +26,7 @@
     </div>
     <div class="warp" style="height: 400px">
     <table class="table table-hover table-bordered text-center" style="font-size: 12px">
-        <tr>
+        <tr style="background:orange">
             <th class="text-center">名称</th>
             <th class="text-center">所属商家</th>
             <th class="text-center">所属分类</th>
@@ -43,7 +43,7 @@
             <th >操作</th>
         </tr>
         @foreach($menuses as $menus)
-        <tr>
+        <tr style="background: #f0c674">
             <td>{{$menus->goods_name}}</td>
             <td>{{$menus->shop->shop_name}}</td>
             <td>{{$menus->categories->name}}</td>
