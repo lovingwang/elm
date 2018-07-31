@@ -17,7 +17,7 @@
            <td >{{$shop->id}}</td>
            <td>{{$shop->name}}</td>
            <td> @if($shop->logo)  <img src="{{$shop->logo}}" style="width: 100px;height: 70px ">@endif</td>
-           <td>{{$shop->status?'是':'否'}}</td>
+           <td>@if ($shop->status=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
            <td>
             <a class="btn btn-info" href="{{route('shop_category.edit',['id'=>$shop->id])}}">编辑</a>
                <a class="btn btn-danger" href="{{route('shop_category.del',['id'=>$shop->id])}}">删除</a>

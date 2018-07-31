@@ -61,7 +61,7 @@
             <td>{{$menus->satisfy_count}}</td>
             <td>{{$menus->satisfy_rate}}</td>
             <td>
-            {{$menus->status}}
+         @if ($menus->status=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif
             </td>
 
             <td class="text">

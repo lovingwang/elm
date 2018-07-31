@@ -82,6 +82,7 @@ class UserController extends BaseController
             ]) ;
 //        登d
 //            dd(Auth::user());
+//            当前用户的验证
             if( Auth::attempt(['name'=>$request->post('name'),
                 'password'=>$request->post('password')
             ],$request->has('remember'))) {
@@ -111,9 +112,10 @@ class UserController extends BaseController
     public function change(Request $request){
 
 //        dd($_POST);
+//        验证旧密码与数据库中是不是一样
 
         if (Hash::check($request->password,Auth::user()->password )) {
-
+//并修改
             Auth::user()->password=bcrypt($request->new_password);
             Auth::user()->save();
             $request->session()->flash('success',"密码修改成功！请重新登录");

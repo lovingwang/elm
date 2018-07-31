@@ -22,7 +22,7 @@
         <td>{{$menucategory->type_accumulation}}</td>
         <td>{{$menucategory->shop->shop_name}}</td>
         <td>{{$menucategory->description}}</td>
-        <td>{{$menucategory->is_selected}}</td>
+        <td>@if ($menucategory->is_selected=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
            <td> <a  class="btn btn-warning"href="{{route('menu_categories.edit',$menucategory)}}">编辑</a>
             <a  class="btn btn-danger"href="{{route('menu_categories.del',$menucategory)}}">删除</a></td>
 

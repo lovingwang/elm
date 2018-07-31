@@ -30,13 +30,13 @@
                <td>{{$shop->shop_name}}</td>
                <td> <img src="{{$shop->shop_img}}" style="width: 100px" ></td>
                <td>{{$shop->shop_rating}}</td>
-               <td>{{$shop->brand?"是":"否"}}</td>
-               <td>{{$shop->on_time?"是":"否"}}</td>
-               <td>{{$shop->fengniao?"是":"否"}}</td>
-               <td>{{$shop->bao?"是":"否"}}</td>
-               <td>{{$shop->piao?"是":"否"}}</td>
+               <td>@if ($shop->brand=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
+               <td>@if ($shop->on_time=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
+               <td>@if ($shop->fengniao=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
+               <td>@if ($shop->bao=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
+               <td>@if ($shop->piao=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif</td>
                <td>
-                   {{$shop->zhun?"是":"否"}}
+                   @if ($shop->zhun=="1")<img src="/bootstrap/1.gif">@else <img src="/bootstrap/0.gif">@endif
                </td>
                <td>{{$shop->start_send}}</td>
                <td>{{$shop->send_cost}}</td>

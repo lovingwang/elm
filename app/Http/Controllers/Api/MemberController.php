@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,9 @@ class MemberController extends Controller
         $tel = $request->input('tel');
         $code = rand(1000, 9999);
 //  并把验证码先存于redis
-        Redis::setex("tel_" . $tel, 300, $code);//存进来
+//        Redis::setex("tel_" . $tel, 300, $code);//存进来
+//        存缓存中
+        Cache::put("tel_".$tel, $code, 300);
 
 //    测试
         return [
@@ -80,7 +83,15 @@ class MemberController extends Controller
 //     验证code是不是与刚才redis中的code相等
         $tel = $data['tel'];
 
-        $redis = Redis::get("tel_" . $tel);
+
+//        $redis = Redis::get("tel_" . $tel);
+//        得到缓存中的值
+
+       $redis= Cache::get("tel_".$tel);
+//       var_dump($redis);
+//       var_dump($data['sms']);
+//       exit;
+
         if ($redis = $data['sms']) {
             $data['password'] = bcrypt($data['password']);
             Member::create($data);
@@ -147,20 +158,22 @@ class MemberController extends Controller
         $tel = $data['tel'];
         $redis = Redis::get("tel_" . $tel);
 
-        $member = Member::where('tel', $tel)->first();;
 
-        if ($redis = $data['sms']) {
+        $member = Member::where('tel', $tel)->first();
+
+        if ($redis === $data['sms']) {
+//            dd('111');
 
             $member->update(['password' => bcrypt($data['password'])]);
 
 
             return [
-                'status' => 'true',
+                'status' => "true",
                 'message' => '密码重置成功'
             ];
         } else {
             return [
-                'status' => 'false',
+                'status' => "false",
                 'message' => '密码重置失败'
             ];
         }
@@ -183,13 +196,13 @@ class MemberController extends Controller
          $member->save();
 
             return [
-                'status' => 'true',
+                'status' => "true",
                 'message' => '密码修改成功'
             ];
 
         }else {
                 return [
-                    'status' => 'false',
+                    'status' => "false",
                     'message' => '密码修改失败'
                 ];
         }
