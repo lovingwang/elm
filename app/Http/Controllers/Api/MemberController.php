@@ -207,7 +207,13 @@ class MemberController extends Controller
                 ];
         }
 
+    }
 
+    public function detail(){
+//得到传过来的值
+       $data=\request()->input('user_id');
+     return  Member::where('id',$data)->first();
 
     }
+
 }

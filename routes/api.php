@@ -27,6 +27,8 @@ Route::any('member/login','Api\MemberController@login');
 Route::post('member/reset','Api\MemberController@reset');
 //修改密码
 Route::any('member/change','Api\MemberController@change');
+//积分和金钱
+Route::any('member/detail','Api\MemberController@detail');
 //收货地址
 Route::any('address/add','Api\AddressController@add');
 //收货地址列表
@@ -39,3 +41,9 @@ Route::any('address/edit','Api\AddressController@edit');
 //添加订单
 Route::any('cate/addc','Api\CateController@addc');
 Route::any('cate/cart','Api\CateController@cart');
+//添加订单接口
+Route::any('order/adds','Api\OrderController@adds');
+Route::any('order/info','Api\OrderController@info');
+//支付接口
+Route::any('order/pay','Api\OrderController@pay');
+Route::any('order/odlist','Api\OrderController@odlist');

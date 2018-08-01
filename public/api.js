@@ -18,9 +18,9 @@ window.api = {
   // 保存修改地址接口
   editAddress: '/api/address/edit',
   // 获得订单列表接口
-  orderList: '/orderList.php',
+  orderList: '/api/order/odlist',
   // 获得指定订单接口
-  order: '/order.php',
+  order: '/api/order/info',
   // 获得商家列表接口
   businessList: '/api/shop/list',
   // 获得指定商家接口
@@ -30,7 +30,9 @@ window.api = {
   // 获取购物车数据接口
   cart: '/api/cate/cart',
   // 添加订单接口
-  addOrder: '/addorder.php',
+  addOrder: '/api/order/adds',
   // 支付接口
-  pay: '/pay.php'
+  pay: '/api/order/pay',
+    // 用户详情接口
+    userDetail: '/api/member/detail'
 };
