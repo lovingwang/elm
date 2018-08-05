@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class MenuController extends BaseController
+class MenuController extends Controller
 {
     public function index(Request $request)
     {

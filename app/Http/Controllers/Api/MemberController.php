@@ -94,6 +94,7 @@ class MemberController extends Controller
 
         if ($redis = $data['sms']) {
             $data['password'] = bcrypt($data['password']);
+            $data['status']=1;
             Member::create($data);
             return [
                 'status' => 'ture',
@@ -118,20 +119,31 @@ class MemberController extends Controller
 
 
         if ($member && Hash::check($request->post('password'), $member->password)) {
-//
+//dd($member);
+            if($member->status==1){
+              return [
+                    'status' => "true",
+                    'message' => "登录成功",
+                    'user_id' => "$member->id",
+                    'username' => "$member->username"
+                ];
+
+
+            }else{
+
+                return
+                    [
+                    'status'=>"false",
+                    'message'=>"对不起，你的账号被禁用"
+                ];
+            }
 //            dd($member->username);
-            return [
-                'status' => "true",
-                'message' => "登录成功",
-                'user_id' => "$member->id",
-                'username' => "$member->username"
-            ];
-        } else {
+
+    }else{
             return ['status' => "false",
                 'message' => '账号或密码错误'];
         }
-    }
-
+        }
 //    重置密码
     public function reset(Request $request)
     {

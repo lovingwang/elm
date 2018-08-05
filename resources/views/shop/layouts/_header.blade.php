@@ -8,7 +8,7 @@
                 <li><a href=""><font size="2">{{\Illuminate\Support\Facades\Auth::user()->name}}</font> </a>
                     <ul>
 
-                        <li><a href="{{route('user.change')}}">修改密码</a></li>
+                        <li style="width: 80px"><a href="{{route('user.change')}}">修改密码</a></li>
                         <li><a href="{{route('user.logout')}}"><font color="red">注销</font></a></li>
 
                     </ul>

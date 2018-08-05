@@ -11,11 +11,15 @@ use App\Models\OrderGoods;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mrgoon\AliSms\AliSms;
 
 class OrderController extends Controller
 {
+
     public function adds(Request $request)
     {
+
+//        没有做事务就用return
 //       找到地址是不是正确
         $address = Address::find($request->input('address_id'));
 
@@ -64,7 +68,8 @@ class OrderController extends Controller
             $dataGoods['goods_price'] = $menu1->goods_price;
             OrderGoods::create($dataGoods);
         }
-
+//订单已经生成删除购物车
+        Cate::where('user_id',$request->input('user_id'))->delete();
 //返回
         return [
             'status' => 'true',
@@ -85,7 +90,8 @@ class OrderController extends Controller
         $data['order_code'] = $order->sn;
         $data['order_birth_time'] = (string)$order->created_at;
 //dd($order->created_at);
-        $data['order_status'] = "代付款";
+//        self::odd();
+        $data['order_status'] = $order->order_status;
         $data['shop_id'] = $order->shop_id;
 //    通过shop_id找到shop——name。img
         $id = $order->shop_id;
@@ -95,8 +101,9 @@ class OrderController extends Controller
 //dd($data['shop_name']);
         $data['shop_img'] = $shop->shop_img;
 //定义一个空数组用来存goods-list
-//    $goodsList=[];
-        $ordergoods = OrderGoods::where('order_id', $request->input('id'))->get();
+    $goodsList=[];
+     $ordergoods = OrderGoods::where('order_id', $request->input('id'))->get();
+
 //        foreach ($ordergoods as $ordergood) {
 //
 //            $goodslist['goods_id'] = $ordergood->goods_id;
@@ -107,12 +114,12 @@ class OrderController extends Controller
 //            $goodsList[] = $goodslist;
 //        }
 
-//        $data['goods_list'] = $goodsList;
-        $data['goods_list']=$ordergoods ;
-//        dd($data['goods_list']);
+//     $data['goods_list'] = $goodsList;
+        $data['goods_list'] =$ordergoods;
+
         $data['order_price'] = $order->total;
         $data['order_address'] = $order->province . $order->city . $order->county . $order->address;
-
+//dd($data);
         return
             $data;
 
@@ -138,6 +145,34 @@ class OrderController extends Controller
                 //      并改变里面的状态
                 $order->status = 1;
                 $order->save();
+//支付成功并生成短信通知
+
+                $code=$order->sn;
+//                dd($code);
+//                得到订单者的电话
+                $address = Address::find($request->input('address_id'));
+                $tel=$address->tel;
+                $config = [
+      'access_key' => 'LTAIRa6RADNzNbVI',
+      'access_secret' => 'XoF7WTW48TO8kWgAHl4tCiGjEYy1iD',
+       'sign_name' => '王波',
+  ];
+
+    $aliSms = new AliSms();
+    $response = $aliSms->sendSms($tel, 'SMS_141605852', ['code'=> $code], $config);
+//  dd($response);
+    if($response->Message=='OK'){
+        return [
+            "status"=>"true",
+            "message"=> "获取订单号成功".$code
+        ];
+    }else{
+        return [
+            "status"=>"flase",
+            "message"=>"获取订单号失败"
+        ];
+    }
+
                 return [
                     'status' => 'true',
                     "message" => "支付成功"
@@ -150,19 +185,21 @@ public  function  odlist(Request $request){
 //        得到当前账号下所有的订单
 $orders=Order::where('user_id',$request->input('user_id'))->get();
 foreach ($orders as $order){
-//创造接口需要的数据
-    $order['id']=(string)$order->id;
-    $order['order_code']=$order->sn;
-    $order['order_birth_time']=(string)$order->created_at;
-    $order['order_status']='已完成';
-    $order['shop_id']=(string)$order->shop_id;
-    $shop=Shop::find($order->shop_id);
-    $order['shop_name']=$shop->shop_name;
-    $order['shop_img']=$shop->shop_img;
 
-//$=[];
+//创造接口需要的数据
+    $data['id']=(string)$order->id;
+    $data['order_code']=$order->sn;
+    $data['order_birth_time']=(string)$order->created_at;
+    $data['order_status']=$order->order_status;
+//    dd($order->order_status);
+    $data['shop_id']=(string)$order->shop_id;
+    $shop=Shop::find($order->shop_id);
+    $data['shop_name']=$shop->shop_name;
+    $data['shop_img']=$shop->shop_img;
+
+
     $ordergoods = OrderGoods::where('order_id', $order->id)->get();
-    $order['goods_list']=$ordergoods;
+    $data['goods_list']=$ordergoods;
 //    foreach ($ordergoods as $ordergood) {
 //
 //        $goodslist['goods_id'] = $ordergood->goods_id;
@@ -173,14 +210,16 @@ foreach ($orders as $order){
 //        $goodsList[] = $goodslist;
 //
 //    }
-    $order['order_price']=$order->total;
-    $order['order_address'] = $order->province . $order->city . $order->county . $order->address;
+    $data['order_price']=$order->total;
+    $data['order_address'] = $order->province . $order->city . $order->county . $order->address;
 
+$del[]=$data;
+//$del[]=$del;
 
-//    dd($data);
 
 }
-    return $orders;
+//    dd($del);
+    return $del;
 
 }
 

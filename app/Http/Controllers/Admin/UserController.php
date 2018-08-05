@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\OrderShipped;
 use App\Models\Shop;
 use App\Models\ShopCategory;
 use App\Models\User;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends BaseController
 {
@@ -104,6 +106,35 @@ class UserController extends BaseController
 //        跳转
 
         return redirect()->route("user.index");
+
+    }
+
+    public function open(Request $request,$id){
+        $user= User::find($id);
+//dd($user);
+       $user->status=1;
+
+          $user->save();
+
+          Mail::to($user)->send(new OrderShipped($user));
+
+//        跳转
+        return redirect()->route("user.index");
+    }
+public function close(Request $request,$id){
+        $user= User::find($id);
+
+        $user->status=0;
+        $user->save();
+
+//        跳转
+        return redirect()->route("user.index");
+    }
+
+
+    public function  info(){
+
+        return view("admin.user.info");
 
     }
 

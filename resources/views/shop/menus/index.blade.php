@@ -2,6 +2,18 @@
 @section('title','菜单列表首页')
 @section('content')
     <div class="container-fluid " style="margin-right:22px">
+<?php
+
+        $shop_id = \Illuminate\Support\Facades\Auth::user()->shop_id;
+
+        if(\App\Models\Shop::where('id',$shop_id)->first()->status==0){
+
+       echo  "对不起，你的菜单还在审核中。。。";
+        }else
+          {
+
+
+        ?>
     <a href="{{route('menu.add')}}" class="btn btn-primary">添加</a>
 
         <form class="form-inline navbar-right">
@@ -74,6 +86,6 @@
     </table>
 
     {{$menuses->appends(['category_id'=>$kind,'min_price'=>$min_price,'max_price'=>$max_price,'search'=>$search])->links()}}
-
+        <?php } ?>
     </div>
 @stop

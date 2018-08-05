@@ -49,12 +49,12 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 @include('admin.layouts._msg')
-        <div class="box">
+
             <!-- /.box-header -->
         @include('vendor.ueditor.assets')
                 @yield('content')
             <!-- /.box-body -->
-        </div>
+
     </div>
     <!-- /.content-wrapper -->
 @include('admin.layouts._footer')

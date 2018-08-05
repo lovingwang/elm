@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends BaseController
 {
@@ -23,11 +24,11 @@ class AdminController extends BaseController
                 'password' => $request->post('password')
             ], $request->has('remember'))) {
                 $request->session()->flash("success","登录成功");
-                return redirect()->intended(route('admin.index0'));
+                return redirect()->route('admin.index0');
 
             }else{
                 $request->session()->flash("danger","账号或密码不正确");
-                return redirect()->intended(route('admin.login'));
+                return redirect()->route('admin.login');
             }
         }
         return view('admin.admin.login');
@@ -46,15 +47,6 @@ class AdminController extends BaseController
     }
 
 
-
-
-
-
-
-
-
-
-
     public function index()
     {
 //   得到所有数据
@@ -71,6 +63,7 @@ class AdminController extends BaseController
     }
 
     public function add(Request $request){
+     $roles= Role::all();
 //        判断健壮
         if($request->isMethod('post')){
             $this->validate($request,
@@ -80,7 +73,11 @@ class AdminController extends BaseController
                 ]);
             $data=$request->all();
             $data['password']=bcrypt($data['password']);
-            Admin::create($data);
+          $admin=  Admin::create($data);
+//同步角色
+//dd($request->post('role'));
+            $admin->syncRoles($request->post('role'));
+
 //    提示信息
             $request->session()->flash('success','添加成功');
 //    跳转
@@ -90,14 +87,14 @@ class AdminController extends BaseController
         }
 
 
-        return view('admin.admin.add');
+        return view('admin.admin.add',compact('roles'));
     }
 
     //编辑
     public function  edit(Request $request ,$id){
 //        得到
 //        这条数据
-
+        $roles= Role::all();
         $admin= Admin::findOrfail($id);
 
         if($request->isMethod('post')){
@@ -123,6 +120,7 @@ class AdminController extends BaseController
                 );
 
                 $admin->save();
+                $admin->syncRoles($request->post('role'));
                 $request->session()->flash('success',"修改成功");
 
                 return redirect()->route('admin.index');
@@ -135,10 +133,11 @@ class AdminController extends BaseController
 
         }
 
-        return view('admin.admin.edit',compact('admin'));
+        return view('admin.admin.edit',compact('admin','roles'));
     }
 //删除
     public  function  del(Request $request,$id){
+
         $admin= Admin::find($id);
         $admin->delete();
         //    提示信息

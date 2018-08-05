@@ -9,6 +9,7 @@
          <th >id</th>
          <th>管理员名字</th>
          <th>管理员邮箱</th>
+         <th>所属类别</th>
          <th>操作</th>
      </tr>
       @foreach($admins as $admin)
@@ -16,11 +17,13 @@
                <td >{{$admin->id}}</td>
                <td>{{$admin->name}}</td>
                <td>{{$admin->email}}</td>
-
+<td>{{str_replace(['[',']','"'],'',json_encode($admin->getRoleNames(),JSON_UNESCAPED_UNICODE))}}</td>
 
            <td>
+               @if($admin->id!=1)
             <a class="btn btn-info" href="{{route('admin.edit',['id'=>$admin->id])}}">编辑</a>
                <a class="btn btn-danger" href="{{route('admin.del',['id'=>$admin->id])}}">删除</a>
+          @endif
            </td>
        </tr>
           @endforeach

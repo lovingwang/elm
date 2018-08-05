@@ -8,11 +8,11 @@
             </div>
             <div class="pull-left info">
                 <p>主人！您好</p>
-                <a href="javascript:;"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
         <!-- search form -->
-        <form action="javascript:;" method="get" class="sidebar-form">
+        <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
@@ -25,119 +25,131 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header"></li>
+            {{--准备循环--}}
+            @foreach(\App\Models\Nav::where('pid',0)->get() as $k=>$v)
             <li class="active treeview">
                 <a href="javascript:;">
-                    <i class="fa fa-dashboard"></i> <span>系统管理平台</span>
+                    <i class="fa fa-dashboard"></i> <span>{{$v->name}}</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{route('admin.index')}}"><i class="fa fa-circle-o"></i> 管理员管理</a></li>
-                    <li ><a href="{{route('shop_category.index')}}"><i class="fa fa-circle-o"></i> 商家分类管理</a></li>
-                    <li><a href="{{route('shop.index')}}"><i class="fa fa-circle-o"></i> 商家信息管理</a></li>
-                    <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> 商家管理</a></li>
-                    <li><a href="{{route('article.index')}}"><i class="fa fa-circle-o"></i> 活动管理</a></li>
+                    @foreach(\App\Models\Nav::where('pid',$v->id)->get() as $k1=>$v1)
+                    <li class="active"><a href="{{route($v1->url)}}"><i class="fa fa-circle-o"></i> {{$v1->name}}</a></li>
+               @endforeach
                 </ul>
             </li>
+  @endforeach
+                {{--上述循环      --}}
 
+
+
+            {{--<li class="treeview">--}}
+                {{--<a href="javascript:;">--}}
+                    {{--<i class="fa fa-files-o"></i>--}}
+                    {{--<span>商家管理</span>--}}
+                    {{--<span class="pull-right-container">--}}
+              {{--<i class="fa fa-angle-left pull-right"></i>--}}
+            {{--</span>--}}
+                {{--</a>--}}
+                {{--<ul class="treeview-menu">--}}
+                    {{--<li ><a href="{{route('shop_category.index')}}"><i class="fa fa-circle-o"></i> 商店分类管理</a></li>--}}
+                    {{--<li><a href="{{route('shop.index')}}"><i class="fa fa-circle-o"></i> 商店信息管理</a></li>--}}
+                    {{--<li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> 商家用户管理</a></li>--}}
+                    {{--<li><a href="{{route('member.index')}}"><i class="fa fa-circle-o"></i> 会员管理</a></li>--}}
+                    {{--<li><a href="{{route('user.info')}}"><i class="fa fa-circle-o"></i> 商家销量信息</a></li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
+            {{--<li class="treeview">--}}
+                {{--<a href="javascript:;">--}}
+                    {{--<i class="fa fa-pie-chart"></i>--}}
+                    {{--<span>管理权限</span>--}}
+                    {{--<span class="pull-right-container">--}}
+              {{--<i class="fa fa-angle-left pull-right"></i>--}}
+            {{--</span>--}}
+                {{--</a>--}}
+                {{--<ul class="treeview-menu">--}}
+                    {{--<li><a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i> 角色表</a></li>--}}
+                    {{--<li><a href="{{route('per.index')}}"><i class="fa fa-circle-o"></i> 权限表</a></li>--}}
+
+                {{--</ul>--}}
+            {{--</li>--}}
+
+
+            {{--<li class="treeview">--}}
+                {{--<a href="javascript:;">--}}
+                    {{--<i class="fa fa-laptop"></i>--}}
+                    {{--<span>平台活动</span>--}}
+                    {{--<span class="pull-right-container">--}}
+              {{--<i class="fa fa-angle-left pull-right"></i>--}}
+            {{--</span>--}}
+                {{--</a>--}}
+                {{--<ul class="treeview-menu">--}}
+                    {{--<li><a href="{{route('article.index')}}"><i class="fa fa-circle-o"></i> 活动管理</a></li>--}}
+
+                {{--</ul>--}}
+            {{--</li>--}}
 
             <li class="treeview">
-                <a href="{{route('user.index0')}}">
-                    <i class="fa fa-pie-chart"></i>
-                    <span>商家首页</span>
+                <a href="javascript:;">
+                    <i class="fa fa-edit"></i> <span>商家平台</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-
                     <li><a href="{{route('user.index0')}}"><i class="fa fa-circle-o"></i> 商家注册或登录管理</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-laptop"></i>
-                    <span>休闲</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
 
+
+
+
+            {{--以下都没用--}}
+            <li>
+                <a href="javascript:;">
+
+                </a>
             </li>
             <li class="treeview">
                 <a href="javascript:;">
-                    <i class="fa fa-edit"></i> <span>娱乐</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
+                    <i class="fa "></i>
 
-            <li class="treeview">
-                <a href="javascript:;">
-                    <i class="fa fa-table"></i> <span>Tables</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+
             </span>
                 </a>
 
             </li>
             <li>
+                <a href="javascript:;">
+                    <i class="fa "></i>
 
+                </a>
             </li>
             <li>
-
-                    <i class="fa fa-envelope"></i> <span>Mailbox</span>
-
+                <a href="javascript:;">
+                    <i class="fa "></i>
                 </a>
             </li>
             <li class="treeview">
                 <a href="javascript:;">
-                    <i class="fa fa-folder"></i> <span>Examples</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <i class="fa fa"></i>
+
                 </a>
 
             </li>
             <li class="treeview">
                 <a href="javascript:;">
-                    <i class="fa fa-share"></i> <span>Multilevel</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <i class="fa "></i>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="javascript:;"><i class="fa fa-circle-o"></i> Level One</a></li>
-                    <li class="treeview">
-                        <a href="javascript:;"><i class="fa fa-circle-o"></i> Level One
-                            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="javascript:;"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                            <li class="treeview">
-                                <a href="javascript:;"><i class="fa fa-circle-o"></i> Level Two
-                                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="javascript:;"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    <li><a href="javascript:;"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="javascript:;"><i class="fa fa-circle-o"></i> Level One</a></li>
-                </ul>
+
             </li>
-            <li><a href="javascript:;"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li><a href="javascript:;"><i class="fa "></i> <span></span></a></li>
             <li class="header">LABELS</li>
-            <li><a href="javascript:;"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="javascript:;"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="javascript:;"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

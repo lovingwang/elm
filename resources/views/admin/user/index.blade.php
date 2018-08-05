@@ -11,6 +11,13 @@
             <a  class="btn btn-warning"href="{{route('user.edit',$user)}}">编辑</a>
             <a  class="btn btn-danger"href="{{route('user.del',$user)}}">删除</a>
                     <a  class="btn btn-danger"href="{{route('user.reset',$user)}}">重置</a>
+                    @if($user->status==0)
+                    <a  class="btn btn-info"href="{{route('user.open',$user)}}">启用</a>
+                    @endif
+                    @if($user->status==1)
+                    <a  class="btn btn-danger"href="{{route('user.close',$user)}}">禁用</a>
+                    @endif
+
 
                 </td></tr>
 @endforeach

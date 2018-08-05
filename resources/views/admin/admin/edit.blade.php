@@ -23,8 +23,15 @@
             <label for="exampleInputPassword1">新密码</label>
             <input type="password" class="form-control" name="new_password" id="exampleInputPassword1" placeholder="newPassword">
         </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">创建角色</label>
+            @foreach($roles as $role)
+                <input type="checkbox" name="role[]"   @if($admin->hasRole($role->name)) checked @endif  value="{{$role->name}}" id="exampleInputEmail1" >{{$role->name}}
+            @endforeach
+        </div>
 
-      <button type="submit" class="btn btn-warning">确认修改</button>
+
+        <button type="submit" class="btn btn-warning">确认修改</button>
 
     </form>
 @stop

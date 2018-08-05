@@ -56,6 +56,7 @@ class UserController extends BaseController
                     'password' => bcrypt($request->input('password')),
                     'name' => $request->input('name'),
                     'email' => $request->input('email'),
+                    'status'=>0,
                 ]);
             });
             //添加成功
@@ -81,16 +82,17 @@ class UserController extends BaseController
                 'password'=>'required',
             ]) ;
 //        登d
-//            dd(Auth::user());
+
 //            当前用户的验证
             if( Auth::attempt(['name'=>$request->post('name'),
                 'password'=>$request->post('password')
             ],$request->has('remember'))) {
-                $users=DB::table('users')->where('name', $request->post('name'))->first();
+//                dd(Auth::user()->status);
+//                $users=DB::table('users')->where('name', $request->post('name'))->first();
+//
+//                $shops=DB::table('shops')->where('id', $users->shop_id)->first();
 
-                $shops=DB::table('shops')->where('id', $users->shop_id)->first();
-
-                if($shops->status==1){
+                if(Auth::user()->status==1){
                     $request->session()->flash("success", "登录成功");
                     return redirect()->route("user.index0");
 
@@ -156,10 +158,7 @@ class UserController extends BaseController
  $articles=$query->paginate(2);
         return view('shop.user.index1',compact('articles'));
     }
-    public function index2(){
 
-        return view('shop.user.index2');
-    }
 
     public function index3(){
 

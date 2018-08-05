@@ -7,6 +7,7 @@ use App\Models\ShopCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -14,6 +15,7 @@ class ShopController extends BaseController
 {
 
     public function index(){
+
 //   得到所有数据
         $shops=Shop::paginate(2);
 //        显示视图
@@ -129,6 +131,7 @@ class ShopController extends BaseController
                     'password' => bcrypt($request->input('password')),
                     'name' => $request->input('name'),
                     'email' => $request->input('email'),
+                    'status'=>0,
                 ]);
             });
             $request->session()->flash("success","编辑成功");

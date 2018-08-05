@@ -46,8 +46,8 @@
                     <li ><a href="{{route('user.index0')}}">首页</a></li>
                     <li><a href="{{route('menu_categories.index')}}">菜品管理</a></li>
                     <li ><a href="{{route('menu.index')}}">菜单管理</a></li>
+                    <li><a href="{{route('order.index')}}">订单管理</a></li>
                     <li><a href="{{route('user.index1')}}">最新活动</a></li>
-                    <li><a href="{{route('user.index2')}}">关于我们</a></li>
                     <li><a href="{{route('user.index3')}}">联系我们</a></li>
                 </ul>
                 <div class="clear"></div>
